@@ -164,40 +164,13 @@ Depuis la VM **`vm-B`**, la résolution DNS ainsi que la joignabilité via le no
 
 ---
 
-## 10. Déploiement Automatisé via Infrastructure as Code (Bicep)
-
-Pour tester cet environnement, un modèle Bicep modulaire est disponible dans le dossier `/infra`.
-
-### Prérequis
-- Azure CLI installé (`az --version`)
-- Un compte Azure actif avec les droits d'administration sur un groupe de ressources
-
-### Commande de déploiement (Azure CLI)
-
-```bash
-# 1. Se connecter à Azure
-az login
-
-# 2. Créer le groupe de ressources
-az group create --name grp_hub_spoke_lab --location francecentral
-
-# 3. Déployer l'infrastructure complète
-az deployment group create \
-  --resource-group grp_hub_spoke_lab \
-  --template-file infra/main.bicep \
-  --parameters adminPassword='VotreMotDePasseComplexe123!'
-
----
-
-## 11. Déploiement automatisé (Infrastructure as Code - Bicep)
+## 10. Déploiement automatisé (Infrastructure as Code - Bicep)
 
 L'intégralité de cette architecture (VNets, Peerings, UDR, NVA Linux préconfigurée, VMs et Zone DNS Privée) est déployable automatiquement via le code **Bicep** fourni dans le dossier `/infra`.
-
 
 ### 📋 Prérequis
 * Un abonnement Azure actif.
 * [Azure CLI](https://learn.microsoft.com/fr-fr/cli/azure/install-azure-cli) installé localement (ou via le Azure Cloud Shell).
-
 
 ### ⚙️ Options de personnalisation (Paramètres)
 
