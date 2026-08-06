@@ -1,4 +1,4 @@
-# 📖 Guide d'implémentation pas-à-pas (Lab)
+## Guide d'implémentation pas-à-pas (Lab)
 
 Ce document retrace les étapes d'implémentation de l'architecture réseau Hub-and-Spoke.
 
@@ -64,3 +64,28 @@ Afin de transformer la machine virtuelle `vm-A` en routeur (NVA), la configurati
 <img width="890" height="240" alt="conf-vm-A" src="https://github.com/user-attachments/assets/e0fe58e7-f946-450f-a64e-b92d00692254" />
 
 ---
+
+## Configuration des Network Security Groups (NSG)
+
+Afin d'autoriser le trafic ICMP (ping) à travers la topologie Hub-and-Spoke tout en appliquant le principe du moindre privilège, des règles spécifiques ont été appliquées sur chaque NSG :
+
+1. **Hub NSG (`vm-A-nsg`) :**
+   - **Inbound (`Allow-Spokes-To-Hub`) :** Autorise ICMP depuis `10.1.0.0/16, 10.2.0.0/16` (Priorité 100).
+   - **Outbound (`Allow-Hub-To-Spokes`) :** Autorise ICMP vers `10.1.0.0/16, 10.2.0.0/16` (Priorité 100).
+
+<img width="1155" height="178" alt="nsg-hub" src="https://github.com/user-attachments/assets/162727de-37b0-4b74-90bc-10bdbf1fec3c" />
+
+2. **Spoke B NSG (`vm-B-nsg`) :**
+   - **Inbound (`Allow-Hub-And-SpokeC`) :** Autorise ICMP depuis `10.0.0.0/16, 10.2.0.0/16` (Priorité 100).
+   - **Outbound (`Allow-SpokeB-To-Hub-And-SpokeC`) :** Autorise ICMP vers `10.0.0.0/16, 10.2.0.0/16` (Priorité 100).
+
+<img width="1169" height="171" alt="nsg-spokeB" src="https://github.com/user-attachments/assets/e2611311-062a-4c59-bcb3-15dd2cd35571" />
+
+3. **Spoke C NSG (`vm-C-nsg`) :**
+   - **Inbound (`Allow-Hub-And-SpokeB`) :** Autorise ICMP depuis `10.0.0.0/16, 10.1.0.0/16` (Priorité 100).
+   - **Outbound (`Allow-SpokeC-To-Hub-And-SpokeB`) :** Autorise ICMP vers `10.0.0.0/16, 10.1.0.0/16` (Priorité 100).
+
+<img width="1171" height="180" alt="nsg-spokeC" src="https://github.com/user-attachments/assets/a3714106-3f61-4cfb-b69a-f70059fa738b" />
+
+---
+
