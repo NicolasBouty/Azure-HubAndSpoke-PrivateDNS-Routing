@@ -135,7 +135,7 @@ Afin de valider la configuration des tables de routage (UDR), du transfert IP (*
 
 ---
 
-## 🌐 Configuration de la Zone DNS Privée (Private DNS Zone)
+## 9. Configuration de la Zone DNS Privée (Private DNS Zone)
 
 Pour permettre la résolution de noms de domaine internes (FQDN) sans passer par des adresses IP statiques hardcodées, une **Zone DNS Privée Azure** a été mise en place.
 
