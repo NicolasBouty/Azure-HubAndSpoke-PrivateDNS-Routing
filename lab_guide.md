@@ -23,20 +23,17 @@ Mise en place de la topologie réseau en étoile (Hub-and-Spoke) avec l'option *
 * Activation du **trafic transféré** (*Allow Forwarded Traffic*) sur l'ensemble des liens pour autoriser le futur routage via la NVA.
 * Absence volontaire de peering entre `spokeB` et `spokeC` (isolation réseau).
 
-<!-- Fais un Drag & Drop de ta dernière capture d'écran juste en dessous de cette ligne -->
 <img width="1291" height="159" alt="perring" src="https://github.com/user-attachments/assets/e6022fa6-1cb3-47a5-81c0-697d8579c160" />
 
 ---
 
 ## 3. Déploiement des Machines Virtuelles (VMs)
 
-Déploiement des 3 machines virtuelles Linux (Ubuntu Server) dans leurs sous-réseaux respectifs, sans IP publique et avec les diagnostics de démarrage activés pour la Console Série :
+Déploiement des 3 machines virtuelles Linux (Ubuntu Server) dans leurs sous-réseaux respectifs, sans IP publique (accès d'administration via la Console Série Azure) :
 * **`vm-A`** : Placée dans `hubA` (`subnetA` - `10.0.1.4`) — Rôle : NVA / Routeur
 * **`vm-B`** : Placée dans `spokeB` (`subnetB` - `10.1.1.4`) — Rôle : Machine hôte Spoke B
 * **`vm-C`** : Placée dans `spokeC` (`subnetC` - `10.2.1.4`) — Rôle : Machine hôte Spoke C
 
-<!-- Insère ta capture d'écran de la liste des ressources ici -->
 <img width="1184" height="426" alt="vm-disque-nic" src="https://github.com/user-attachments/assets/6e8705aa-d142-426c-849e-3a3e0dc3e803" />
-
 
 ---
