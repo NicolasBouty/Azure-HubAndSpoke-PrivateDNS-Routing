@@ -48,3 +48,19 @@ Afin de permettre à `vm-A` d'agir comme un routeur réseau (Virtual Network App
 
 <img width="696" height="197" alt="transfert-ip2" src="https://github.com/user-attachments/assets/c2c055e9-2271-4cef-831c-832576b624c1" />
 
+---
+
+## 5. Configuration du système d'exploitation de la NVA (vm-A)
+
+Afin de transformer la machine virtuelle `vm-A` en routeur (NVA), la configuration réseau du système d'exploitation Ubuntu a été ajustée via la Console Série :
+
+1. **Activation de l'IP Forwarding IPv4 (Noyau Linux) :**
+   * Activation à chaud : `net.ipv4.ip_forward = 1`
+   * Persistance au redémarrage via `/etc/sysctl.conf`
+2. **Configuration du Pare-feu (UFW) :**
+   * Modification de la politique de transfert par défaut de `DROP` vers `ACCEPT` dans `/etc/default/ufw` pour autoriser le relai des paquets (Ping / ICMP et trafic transitant).
+   * Rechargement des règles du pare-feu (`Firewall is active and enabled`).
+
+<img width="890" height="240" alt="conf-vm-A" src="https://github.com/user-attachments/assets/e0fe58e7-f946-450f-a64e-b92d00692254" />
+
+---
