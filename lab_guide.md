@@ -89,3 +89,26 @@ Afin d'autoriser le trafic ICMP (ping) à travers la topologie Hub-and-Spoke tou
 
 ---
 
+## Configuration du Routage Personnalisé (UDR)
+
+Par défaut, l'appairage VNet (Peering) n'est pas transitif. Pour permettre la communication inter-spokes à travers la VM NVA (`10.0.1.4`), deux tables de routage personnalisées ont été créées et associées :
+
+1. **Table de routage `udr-spokeB` :**
+   - **Nom de la route :** `To-SpokeC`
+   - **Destination :** `10.2.0.0/16` (Spoke C)
+   - **Next Hop Type :** `Virtual Appliance`
+   - **Next Hop Address :** `10.0.1.4` (VM-A / NVA Hub)
+   - **Association :** Appliquée au sous-réseau `subnetB` (`spokeB`)
+
+<img width="1299" height="97" alt="udr-spokeB" src="https://github.com/user-attachments/assets/96198400-7504-4138-8f2f-127b4eb63b36" />
+
+2. **Table de routage `udr-spokeC` :**
+   - **Nom de la route :** `To-SpokeB`
+   - **Destination :** `10.1.0.0/16` (Spoke B)
+   - **Next Hop Type :** `Virtual Appliance`
+   - **Next Hop Address :** `10.0.1.4` (VM-A / NVA Hub)
+   - **Association :** Appliquée au sous-réseau `subnetC` (`spokeC`)
+  
+<img width="1298" height="97" alt="udr-spokeC" src="https://github.com/user-attachments/assets/2870e8b9-008a-4db7-9d67-79a4333a8001" />
+
+---
