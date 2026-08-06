@@ -186,3 +186,36 @@ az deployment group create \
   --resource-group grp_hub_spoke_lab \
   --template-file infra/main.bicep \
   --parameters adminPassword='VotreMotDePasseComplexe123!'
+
+---
+
+## 11. Déploiement automatisé (Infrastructure as Code - Bicep)
+
+L'intégralité de cette architecture (VNets, Peerings, UDR, NVA Linux préconfigurée, VMs et Zone DNS Privée) est déployable automatiquement via le code **Bicep** fourni dans le dossier `/infra`.
+
+
+### 📋 Prérequis
+* Un abonnement Azure actif.
+* [Azure CLI](https://learn.microsoft.com/fr-fr/cli/azure/install-azure-cli) installé localement (ou via le Azure Cloud Shell).
+
+
+### ⚙️ Options de personnalisation (Paramètres)
+
+Avant de lancer le déploiement, vous pouvez personnaliser l'infrastructure en modifiant le fichier `infra/parameters.bicepparam` ou via la ligne de commande :
+
+| Paramètre | Description | Valeur par défaut |
+| :--- | :--- | :--- |
+| **`location`** | Région Azure où déployer les ressources | `'francecentral'` |
+| **`adminUsername`** | Nom de l'utilisateur administrateur des VMs | `'ubuadmin'` |
+| **`dnsZoneName`** | Nom de la Zone DNS Privée Azure | `'tp.internal'` |
+| **`adminPassword`** | Mot de passe administrateur sécurisé | *(Demandé au déploiement)* |
+
+
+### 🚀 Étapes de déploiement
+
+#### 1. Cloner le dépôt et se connecter à Azure
+
+```bash
+git clone [https://github.com/NicolasBouty/Azure-HubAndSpoke-PrivateDNS-Routing.git](https://github.com/NicolasBouty/Azure-HubAndSpoke-PrivateDNS-Routing.git)
+cd Azure-HubAndSpoke-PrivateDNS-Routing
+az login
