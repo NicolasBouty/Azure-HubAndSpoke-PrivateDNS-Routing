@@ -65,7 +65,7 @@ Afin de transformer la machine virtuelle `vm-A` en routeur (NVA), la configurati
 
 ---
 
-## Configuration des Network Security Groups (NSG)
+## 6. Configuration des Network Security Groups (NSG)
 
 Afin d'autoriser le trafic ICMP (ping) à travers la topologie Hub-and-Spoke tout en appliquant le principe du moindre privilège, des règles spécifiques ont été appliquées sur chaque NSG :
 
@@ -89,7 +89,7 @@ Afin d'autoriser le trafic ICMP (ping) à travers la topologie Hub-and-Spoke tou
 
 ---
 
-## Configuration du Routage Personnalisé (UDR)
+## 7. Configuration du Routage Personnalisé (UDR)
 
 Par défaut, l'appairage VNet (Peering) n'est pas transitif. Pour permettre la communication inter-spokes à travers la VM NVA (`10.0.1.4`), deux tables de routage personnalisées ont été créées et associées :
 
