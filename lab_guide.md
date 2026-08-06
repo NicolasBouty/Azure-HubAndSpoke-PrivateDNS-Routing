@@ -166,7 +166,7 @@ Depuis la VM **`vm-B`**, la résolution DNS ainsi que la joignabilité via le no
 
 ## 10. Déploiement Automatisé via Infrastructure as Code (Bicep)
 
-Pour rejouer ou tester cet environnement en 1 seule commande, un modèle Bicep modulaire est disponible dans le dossier `/infra`.
+Pour tester cet environnement, un modèle Bicep modulaire est disponible dans le dossier `/infra`.
 
 ### Prérequis
 - Azure CLI installé (`az --version`)
@@ -185,4 +185,4 @@ az group create --name grp_hub_spoke_lab --location francecentral
 az deployment group create \
   --resource-group grp_hub_spoke_lab \
   --template-file infra/main.bicep \
-  --parameters adminPassword='TonMotDePasseComplexe123!'
+  --parameters adminPassword='VotreMotDePasseComplexe123!'
