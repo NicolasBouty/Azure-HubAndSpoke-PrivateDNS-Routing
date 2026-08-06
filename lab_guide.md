@@ -111,6 +111,8 @@ Par défaut, l'appairage VNet (Peering) n'est pas transitif. Pour permettre la c
   
 <img width="1298" height="97" alt="udr-spokeC" src="https://github.com/user-attachments/assets/2870e8b9-008a-4db7-9d67-79a4333a8001" />
 
+Les tables de routage sont associées a leur subnet respectif
+
 ---
 
 ## 8. Validation du Routage et Transit Inter-Spokes (NVA)
