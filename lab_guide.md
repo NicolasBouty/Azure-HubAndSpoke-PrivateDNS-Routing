@@ -133,3 +133,31 @@ Afin de valider la configuration des tables de routage (UDR), du transfert IP (*
 
 <img width="821" height="344" alt="ping-tracep" src="https://github.com/user-attachments/assets/c2514ddd-0535-4bb6-a748-0a935344ed8a" />
 
+---
+
+## 🌐 Configuration de la Zone DNS Privée (Private DNS Zone)
+
+Pour permettre la résolution de noms de domaine internes (FQDN) sans passer par des adresses IP statiques hardcodées, une **Zone DNS Privée Azure** a été mise en place.
+
+### 1. Déploiement de la zone DNS
+- **Nom de la zone :** `tp.internal`
+- **Groupe de ressources :** `grp_tpaz104_05`
+
+### 2. Liaisons de Réseau Virtuel (Virtual Network Links)
+La zone DNS a été associée aux 3 réseaux virtuels de l'architecture. L'option **Inscription automatique** (*Auto-registration*) a été activée pour permettre à Azure de créer dynamiquement les enregistrements A correspondant aux cartes réseau des machines virtuelles :
+
+- **`hubA-dns`** → Réseau virtuel `hubA` *(Auto-registration : Activé)*
+- **`spokeB-dns`** → Réseau virtuel `spokeB` *(Auto-registration : Activé)*
+- **`spokeC-dns`** → Réseau virtuel `spokeC` *(Auto-registration : Activé)*
+
+<img width="1059" height="225" alt="liensDNS" src="https://github.com/user-attachments/assets/d9b82558-6356-4593-99fa-f705c6d7e0ca" />
+
+### 3. Validation de la résolution et connectivité FQDN
+Depuis la VM **`vm-B`**, la résolution DNS ainsi que la joignabilité via le nom de domaine complet (FQDN) ont été testées avec succès :
+
+- **Commande :** `nslookup vm-C.tp.internal`  
+  - *Résultat :* Traduction exacte du nom FQDN vers l'adresse IP `10.2.1.4`.
+- **Commande :** `ping vm-C.tp.internal`  
+  - *Résultat :* Paquets transmis avec **0% de perte** et un TTL de **63**, prouvant que la résolution DNS fonctionne et que le trafic continue de transiter de manière sécurisée par la NVA (`10.0.1.4`).
+
+<img width="701" height="386" alt="testDNS" src="https://github.com/user-attachments/assets/f3a509bf-28e9-4445-bb44-ec1f39725ffe" />
