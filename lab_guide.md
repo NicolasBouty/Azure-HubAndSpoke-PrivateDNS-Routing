@@ -112,3 +112,22 @@ Par défaut, l'appairage VNet (Peering) n'est pas transitif. Pour permettre la c
 <img width="1298" height="97" alt="udr-spokeC" src="https://github.com/user-attachments/assets/2870e8b9-008a-4db7-9d67-79a4333a8001" />
 
 ---
+
+## 8. Validation du Routage et Transit Inter-Spokes (NVA)
+
+Afin de valider la configuration des tables de routage (UDR), du transfert IP (*IP Forwarding*) et de la NVA (`vm-A`), deux tests de connectivité ont été réalisés depuis la machine **`vm-B`** (Spoke B - `10.1.1.4`) vers **`vm-C`** (Spoke C - `10.2.1.4`).
+
+### 1. Test de connectivité ICMP (Ping)
+- **Commande :** `ping 10.2.1.4`
+- **Résultat :** Communication établie avec **0% de perte de paquets**.
+- **Analyse TTL :** Le TTL de réponse est de **63** (au lieu de 64 par défaut sur Linux), ce qui confirme le passage des paquets par un routeur intermédiaire (*1 hop*).
+
+### 2. Traçage de route (Tracepath)
+- **Commande :** `tracepath 10.2.1.4`
+- **Résultat :** 
+  1. `10.0.1.4` (NVA / Hub A)
+  2. `10.2.1.4` (`vm-C` atteinte)
+- **Conclusion :** Le premier saut s'effectue bien sur la VM Hub (`10.0.1.4`), prouvant que le trafic est correctement intercepté et routé par la NVA au lieu d'emprunter un chemin direct.
+
+<img width="821" height="344" alt="ping-tracep" src="https://github.com/user-attachments/assets/c2514ddd-0535-4bb6-a748-0a935344ed8a" />
+
