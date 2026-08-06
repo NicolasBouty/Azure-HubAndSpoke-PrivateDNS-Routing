@@ -37,3 +37,13 @@ Déploiement des 3 machines virtuelles Linux (Ubuntu Server) dans leurs sous-ré
 <img width="1184" height="426" alt="vm-disque-nic" src="https://github.com/user-attachments/assets/6e8705aa-d142-426c-849e-3a3e0dc3e803" />
 
 ---
+
+## 4. Configuration du transfert IP Azure sur la NVA
+
+Afin de permettre à `vm-A` d'agir comme un routeur réseau (Virtual Network Appliance - NVA) et de retransmettre le trafic entre les Spokes, le transfert IP (IP Forwarding) a été activé au niveau de l'interface réseau (NIC) d'Azure.
+
+* **Interface Réseau :** `vm-a823_z1` (NIC de `vm-A`)
+* **Paramètre :** `Activer le transfert IP` = **Activé**
+* **IP Privée :** `10.0.1.4`
+
+* <img width="929" height="263" alt="transfert-ip" src="https://github.com/user-attachments/assets/35b65241-d16f-4e41-bf19-26ac825305c0" />
