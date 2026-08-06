@@ -46,4 +46,5 @@ Afin de permettre à `vm-A` d'agir comme un routeur réseau (Virtual Network App
 * **Paramètre :** `Activer le transfert IP` = **Activé**
 * **IP Privée :** `10.0.1.4`
 
-* <img width="929" height="263" alt="transfert-ip" src="https://github.com/user-attachments/assets/35b65241-d16f-4e41-bf19-26ac825305c0" />
+<img width="696" height="197" alt="transfert-ip2" src="https://github.com/user-attachments/assets/c2c055e9-2271-4cef-831c-832576b624c1" />
+
