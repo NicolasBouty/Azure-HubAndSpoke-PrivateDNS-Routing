@@ -161,3 +161,28 @@ Depuis la VM **`vm-B`**, la résolution DNS ainsi que la joignabilité via le no
   - *Résultat :* Paquets transmis avec **0% de perte** et un TTL de **63**, prouvant que la résolution DNS fonctionne et que le trafic continue de transiter de manière sécurisée par la NVA (`10.0.1.4`).
 
 <img width="701" height="386" alt="testDNS" src="https://github.com/user-attachments/assets/f3a509bf-28e9-4445-bb44-ec1f39725ffe" />
+
+---
+
+## 10. Déploiement Automatisé via Infrastructure as Code (Bicep)
+
+Pour rejouer ou tester cet environnement en 1 seule commande, un modèle Bicep modulaire est disponible dans le dossier `/infra`.
+
+### Prérequis
+- Azure CLI installé (`az --version`)
+- Un compte Azure actif avec les droits d'administration sur un groupe de ressources
+
+### Commande de déploiement (Azure CLI)
+
+```bash
+# 1. Se connecter à Azure
+az login
+
+# 2. Créer le groupe de ressources
+az group create --name grp_hub_spoke_lab --location francecentral
+
+# 3. Déployer l'infrastructure complète
+az deployment group create \
+  --resource-group grp_hub_spoke_lab \
+  --template-file infra/main.bicep \
+  --parameters adminPassword='TonMotDePasseComplexe123!'
